@@ -11,10 +11,6 @@ ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
 app = Flask(__name__)
 
 
-@app.route('/<path:path>')
-def style_transfer(path):
-    return "akari"
-
 @app.route('/<path:path>', methods=["POST"])
 def upload(path):
     f = request.files['file1']
@@ -24,8 +20,8 @@ def upload(path):
     f2 = request.files['file2']
     input_filepath2 = os.path.join('./file2.jpeg' )
     f2.save(input_filepath2)
-    check = subprocess.run(["python", "compare2.py", "/images/20170512-110547", "file1.jpeg", "file2.jpeg"])
-        
+    check = subprocess.run(["python", "compare.py", "/data/20170512-110547", "file1.jpeg", "file2.jpeg"])
+
     pkl_path = "/output/img_facenet.pkl"
 
     with open(pkl_path, 'rb') as f:
